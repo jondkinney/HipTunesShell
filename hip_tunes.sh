@@ -4,7 +4,6 @@ ROOM="YOUR_ROOM_ID_HERE"
 COLOR="purple"
 TOKEN="YOUR_TOKEN_HERE"
 
-
 if ps x | grep iTunes | grep -q -v grep;   then
   OUT=`osascript -e 'tell application "iTunes"
 set trackname to name of current track
@@ -31,6 +30,7 @@ set output to "" & trackname & artistshow & albumshow
   end tell'`
 fi
 
+# TODO remove duplication by looping through the vars
 ENCODED_MESSAGE=$(echo $OUT | perl -pe's/([^-_.~A-Za-z0-9])/sprintf("%%%02X", ord($1))/seg');
 ENCODED_USER=$(echo $USER | perl -pe's/([^-_.~A-Za-z0-9])/sprintf("%%%02X", ord($1))/seg');
 # echo $ENCODED
